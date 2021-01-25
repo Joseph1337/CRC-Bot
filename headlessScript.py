@@ -7,7 +7,7 @@ from selenium.webdriver import ActionChains
 import time
 
 
-def reserveSlot():
+def reserveSlot(username, password, timeSlot):
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     chrome_options.add_argument('--disable-gpu')
@@ -20,8 +20,8 @@ def reserveSlot():
 
     driver.find_element_by_id('loginLink').click() #click login
     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="divLoginOptions"]/div[2]/div[3]/div/button'))).click() #select to login via MyCRC account
-    driver.find_element_by_id('txtUsername').send_keys("jguo345") #username
-    driver.find_element_by_id('txtPassword').send_keys("562dfc11!") #password
+    driver.find_element_by_id('txtUsername').send_keys(username) #username
+    driver.find_element_by_id('txtPassword').send_keys(password) #password
     driver.find_element_by_id('btnLogin').click()
 
     # driver.get_screenshot_as_file("capture.png")
@@ -37,14 +37,14 @@ def reserveSlot():
     for slot in slots:
         time = slot.find_element_by_tag_name('p')
         availability = slot.find_element_by_tag_name('span')
-        if "5:30 - 6 PM" in time.text and availability.text[:1] > "0": #first option
+        if timeSlot in time.text and availability.text[:1] > "0": #first option
             slot.find_element_by_tag_name('button').click()
             bookComplete = True
             break
-        elif "6:30 - 7 PM" in time.text and availability.text[:1] > "0": #second option
-            slot.find_element_by_tag_name('button').click()
-            bookComplete = True
-            break
+        # elif "6:30 - 7 PM" in time.text and availability.text[:1] > "0": #second option
+        #     slot.find_element_by_tag_name('button').click()
+        #     bookComplete = True
+        #     break
 
 
     driver.quit()
