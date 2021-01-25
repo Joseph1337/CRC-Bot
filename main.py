@@ -1,10 +1,4 @@
-# import func
+import func
+func.login("jguo345", "562dfc11!")
 
-# print(func.login("jguo345", "562dfc11!"))
-
-
-# # times = func.getTimeSlotId()
-# # print(times)
-# # print(func.getCookies())
-
-
+print(func.reserveSlot("5:30 - 6 PM"))
