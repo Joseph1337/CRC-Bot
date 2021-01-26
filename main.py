@@ -1,4 +1,4 @@
 import func
-func.login("jguo345", "562dfc11!")
+func.login("username", "password")
 
-print(func.reserveSlot("5:30 - 6 PM"))
+print(func.reserveSlot("7 - 7:30 AM")) #time must be in format "H:MM - H:MM AM/PM"
